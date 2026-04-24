@@ -30,7 +30,7 @@ import {
   History,
   Layout,
   ShieldAlert,
-  Smartphone,
+  Apple,
   Bot
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -140,7 +140,7 @@ const APPS: AppItem[] = [
     id: "coc",
     name: "Clash of Clans Mod",
     category: "Games",
-    size: "367 MB",
+    size: "410.2 MB",
     version: "v15.0.0",
     description: "Clash of Clans modified with unlimited resources and private server access.",
     updateLog: "⚔️ تایبەتمەندی:\n✅ پارە و ئەڵماس بێسنوور (Unlimited)\n✅ سێرڤەرێ تایبەت (Private Server)\n✅ هەمی سەرباز ڤکرینە",
@@ -149,7 +149,7 @@ const APPS: AppItem[] = [
     rating: 4.8,
     downloads: "300K+",
     author: "Yousif Duski",
-    ipaLink: "https://url-shortener.me/J8X6",
+    ipaLink: "https://url-shortener.me/LGG4",
     directLink: "https://url-shortener.me/L3UJ",
     platform: 'ios'
   },
@@ -184,6 +184,23 @@ const APPS: AppItem[] = [
     downloads: "200K+",
     author: "Yousif Duski",
     ipaLink: "https://mega.nz/file/RyxWmITI#fWLbue1FBU79KaOjAOonqZ6p66juSneaOCDhq9mglmU",
+    platform: 'ios'
+  },
+  {
+    id: "minecraft",
+    name: "Minecraft",
+    category: "Games",
+    size: "832 MB",
+    version: "v1.20.0",
+    description: "Explore infinite worlds and build everything from the simplest of homes to the grandest of castles.",
+    updateLog: "✨ تایبەتمەندی:\n\n✅ mincraft بەلاش (Free)",
+    icon: "https://i.postimg.cc/sgqQqKJy/unnamed-(17).jpg",
+    banner: "https://picsum.photos/seed/minecraft/600/300",
+    rating: 4.9,
+    downloads: "500K+",
+    author: "Yousif Duski",
+    ipaLink: "https://url-shortener.me/LGNC",
+    directLink: "https://url-shortener.me/LGP4",
     platform: 'ios'
   },
   {
@@ -410,10 +427,14 @@ const HomeView = ({ isDarkMode, accentColor, onSelectApp }: { isDarkMode: boolea
               key={app.id}
               whileTap={{ scale: 0.95 }}
               onClick={() => onSelectApp(app)}
-              className={`min-w-[280px] h-44 rounded-[2.5rem] relative overflow-hidden cursor-pointer shadow-2xl group`}
+              className={`min-w-[280px] h-44 rounded-[2.5rem] relative overflow-hidden cursor-pointer shadow-2xl group transition-all`}
             >
-              <img src={app.banner} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <img 
+                src={app.banner} 
+                className="absolute inset-0 w-full h-full object-cover blur-[4px] opacity-90 transition-transform duration-700 group-hover:scale-110" 
+                referrerPolicy="no-referrer" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="flex items-center gap-3">
                   <img src={app.icon} className="w-10 h-10 rounded-xl border border-white/20 shadow-2xl" />
@@ -788,7 +809,7 @@ const SettingView = ({ state, setState }: { state: AppState, setState: React.Dis
         <SectionHeader title="Community" isDarkMode={state.isDarkMode} />
         <div className="space-y-5">
           <a 
-            href="https://t.me" 
+            href="https://t.me/RAkIRD1" 
             target="_blank" 
             rel="noopener noreferrer"
             className={`flex items-center gap-6 p-8 rounded-[2.5rem] font-black transition-all active:scale-95 ${
@@ -835,9 +856,38 @@ export default function App() {
     }
   }, [appState.isDarkMode]);
 
+  useEffect(() => {
+    // Disable context menu (right click)
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // Disable copy/paste and view source shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        // Ctrl+C, Ctrl+V, Ctrl+U (View Source), Ctrl+S (Save), Ctrl+Shift+I (DevTools)
+        (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'u' || e.key === 's' || e.key === 'a')) ||
+        // F12 (DevTools)
+        e.key === 'F12' ||
+        // Meta (Command) keys for Mac
+        (e.metaKey && (e.key === 'c' || e.key === 'v' || e.key === 'u' || e.key === 's' || e.key === 'a'))
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const navItems: { id: Tab; label: string; icon: typeof Home }[] = [
     { id: "home", label: "Home", icon: Home },
-    { id: "ios", label: "iPhone", icon: Smartphone },
+    { id: "ios", label: "iPhone", icon: Apple },
     { id: "apk", label: "Android", icon: Bot },
     { id: "setting", label: "Setting", icon: Settings },
   ];

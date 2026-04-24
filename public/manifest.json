@@ -1,0 +1,21 @@
+{
+  "name": "RA KURD.STORE",
+  "short_name": "RA KURD",
+  "description": "The official RA KURD store for iOS applications and IPA packages.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/PrwCMc4h/unnamed-17.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://i.postimg.cc/PrwCMc4h/unnamed-17.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
